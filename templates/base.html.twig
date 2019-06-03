@@ -8,7 +8,7 @@
 
     {% block stylesheets %}
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/padawan.css') }}">
     {% endblock stylesheets %}
 
@@ -24,12 +24,21 @@
             <li class="nav-item active">
                 <a class="nav-link" href="#">Déposer un projet <span class="sr-only">(current)</span></a>
             </li>
+            {% if app.user == false %}
             <li class="nav-item active">
                 <a class="nav-link" href="#">Devenir un Padawan</a>
             </li>
+            {% endif %}
             <li class="nav-item active">
                 <a class="nav-link" href="projets.html">Voir les derniers projets</a>
             </li>
         </ul>
     </div>
+    <div class="text-right">
+        <p class="badge-light badge">Bienvenue {% if app.user %} {{ app.user.prenom }} {% endif %} !</p>
+    </div>
 </nav>
+{% block body %} {% endblock body %}
+<script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"></script>
+<script>window.jQuery || document.write('<script src="{{ asset('js/jquery-3.3.1.slim.min.js') }}"><\/script>')</script><script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script></body>
+</html>
