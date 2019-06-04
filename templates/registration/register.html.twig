@@ -1,16 +1,67 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription !{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <h1>Un Padawan devenir tu veux ?</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.prenom) }}
-        {{ form_row(registrationForm.nom) }}
-        {{ form_row(registrationForm.plainPassword) }}
 
-        <button class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                {{ form_start(registrationForm) }}
+
+                {#        {{ form_row(registrationForm.email) }}#}
+                {#    Détail du champs email (si on veux tout personnaliser)#}
+                {{ form_label(registrationForm.email) }}
+                <span style="color:red">*</span>
+                {{ form_widget(registrationForm.email) }}
+                <div class="form-error">
+                    {{ form_errors(registrationForm.email) }}
+                </div>
+
+                {{ form_row(registrationForm.prenom) }}
+
+                {{ form_label(registrationForm.nom) }}
+                <span style="color:red">*</span>
+                {{ form_widget(registrationForm.nom) }}
+                <div class="form-error">
+                    {{ form_errors(registrationForm.nom) }}
+                </div>
+
+                {{ form_label(registrationForm.bio) }}
+                <span style="color:red">*</span>
+                {{ form_widget(registrationForm.bio) }}
+                <div class="form-error">
+                    {{ form_errors(registrationForm.bio) }}
+                </div>
+
+                {{ form_label(registrationForm.github) }}
+                <span style="color:red">*</span>
+                {{ form_widget(registrationForm.github) }}
+                <div class="form-error">
+                    {{ form_errors(registrationForm.github) }}
+                </div>
+
+                {{ form_label(registrationForm.plainPassword) }}
+                <span style="color:red">*</span>
+                {{ form_widget(registrationForm.plainPassword) }}
+                <div class="form-error">
+                    {{ form_errors(registrationForm.plainPassword) }}
+                </div>
+
+                {#    ou on appelle une seule function twig qui génère tous les champs en une fois
+                    {{ form_row(registrationForm) }}
+                #}
+
+                <button class="btn btn-primary mb-3 mt-2">Son compte créer</button>
+                {{ form_end(registrationForm) }}
+            </div>
+            <div class="col-4">
+                <img src="{{ asset('img/padawan.jpg') }}" alt="" class="img-fluid">
+                <a href="{{ path('app_login') }}" class="btn btn-block btn-dark">Déjà Padawan ? <br> Identifie-toi</a>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

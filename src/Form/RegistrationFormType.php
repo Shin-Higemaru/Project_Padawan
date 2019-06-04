@@ -17,12 +17,13 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email',TextType::class,['label'=>'Votre email *'])
-            ->add('prenom',TextType::class,['label'=>'Votre prenom'])
-            ->add('nom',TextType::class,['label'=>'Votre nom *'])
-            ->add('bio',TextareaType::class,['label'=>'Quelques mots sur vous'])
-            ->add('github',TextType::class,['label'=>'Votre pseudo github *'])
-            ->add('plainPassword', PasswordType::class, [
+//            ->add('email',TextType::class,['label'=>'Votre email *','attr'=>['class'=>'form-control']])
+            ->add('email',TextType::class,['label'=>'Votre email :','attr'=>['class'=>'form-control mb-3']])
+            ->add('prenom',TextType::class,['label'=>'Votre prenom :','attr'=>['class'=>'form-control mb-3']])
+            ->add('nom',TextType::class,['label'=>'Votre nom :','attr'=>['class'=>'form-control mb-3']])
+            ->add('bio',TextareaType::class,['label'=>'Quelques mots sur vous :','attr'=>['class'=>'form-control mb-3']])
+            ->add('github',TextType::class,['label'=>'Votre pseudo github :','attr'=>['class'=>'form-control mb-3']])
+            ->add('plainPassword', PasswordType::class, ['label'=>'Votre mot de passe :',
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
@@ -37,7 +38,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-            ])
+                'attr'=>['class'=>'form-control mb-3']])
         ;
     }
 

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
+use App\Service\GitHubGraphQL;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,13 +18,19 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator): Response
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, LoginFormAuthenticator $authenticator, GitHubGraphQL $gitHubGraphQL): Response
     {
+        // $gitHubGraphQL = new GitHubGraphQL();
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $github_profile = $gitHubGraphQL->getProfileInfo($user->getGithub());
+//            dd($github_profile);
+            $avatar_github = $github_profile['data'] ['user'] ['avatarUrl'];
+
+            $user->setAvatarGithub($avatar_github);
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -32,7 +39,8 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager =
+                $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
