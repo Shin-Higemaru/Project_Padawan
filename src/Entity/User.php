@@ -84,6 +84,8 @@ class User implements UserInterface
         $this->projects = new ArrayCollection();
     }
 
+
+
     public function getId(): ?int
     {
         return $this->id;

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4>Au maître Jedi un projet tu proposeras</h4>
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                {{ form_row(form) }}
+                <button class="btn btn-primary">Un projet tu peux proposer</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock body %}

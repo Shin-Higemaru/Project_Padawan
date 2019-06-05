@@ -38,6 +38,7 @@ class Project
      */
     private $createdAt;
 
+   
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tag", inversedBy="projects")
      */
@@ -55,9 +56,23 @@ class Project
      */
     private $proposePar;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+
+//        $this->createdAt = new \DateTime();
+        $this->setCreatedAt(new \DateTime);
+
+//        $this->updatedAt = new \DateTime();
+        $this->setUpdatedAt(new \DateTime);
+
+//        $this->isOnline = true;
+        $this->setIsOnline(true);
     }
 
     public function getId(): ?int
@@ -159,6 +174,18 @@ class Project
     public function setProposePar(?User $proposePar): self
     {
         $this->proposePar = $proposePar;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
